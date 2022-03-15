@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 const { TextArea } = Input;
 
-function SingleComment(props) {
+function SingleComment(props) { //댓글 컴포넌트 함수
     const user = useSelector(state => state.user);
     const [OpenReply, setOpenReply] = useState(false);
     const [CommentValue, setCommentValue] = useState('');
@@ -15,7 +15,7 @@ function SingleComment(props) {
     };
 
     const onHandleChange = (e) => {
-        setCommentValue(e.currentTarget.CommentValue)
+        setCommentValue(e.currentTarget.value)
     };
 
     const onSubmit = (e) => {
@@ -33,6 +33,7 @@ function SingleComment(props) {
             if(response.data.success) {
                 console.log(response.data);
                 setCommentValue('');
+                setOpenReply(false);
                 props.refreshFunction(response.data.result);
             } else {
                 alert('커텐트를 저장하지 못했습니다.')

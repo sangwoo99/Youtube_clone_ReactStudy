@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React , { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';
+import ReplyComment from './ReplyComment';
 
 function Comment(props) {
   const videoId = props.postId;
@@ -45,8 +46,11 @@ function Comment(props) {
           // responseTo(~댓글의 대댓글인지)가 없을때 그냥 댓글들 노출
          props.commentLists && props.commentLists.map((comment, index) => (
            (!comment.responseTo && 
-              <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId} key={index} />
-           )
+              <React.Fragment>
+                <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId} key={index} />
+                <ReplyComment refreshFunction={props.refreshFunction} commentLists={props.commentLists} parentCommentId= {comment._id} videoId={videoId}/>
+              </React.Fragment>
+            )
          )) 
         }
 
