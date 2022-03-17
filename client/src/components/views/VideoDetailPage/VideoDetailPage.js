@@ -4,6 +4,7 @@ import Axios from 'axios';
 import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscriber';
 import Comment from './Sections/Comment';
+import LikeDislikes from './Sections/LikeDislikes';
 
 function VideoDetailPage(props) {
     
@@ -49,7 +50,7 @@ function VideoDetailPage(props) {
                     <div style={{ width: '80%', padding: '3rem 4rem' }}>
                         <video style={{ width: '100%' }} src={`http://localhost:5000/${VideoDetail.filePath}`} controls/>
                         {/* VideoDetail.filePath를 가져오기 전에 화면이 렌더링되면 undefined 에러 뜸  */}
-                        <List.Item actions={ [ subscribeButton ] }>
+                        <List.Item actions={ [ <LikeDislikes userId={localStorage.getItem('userId')} videoId={videoId} />, subscribeButton ] }>
                             <List.Item.Meta
                                 avatar={<Avatar src={VideoDetail.writer.image}/>}
                                 title={VideoDetail.writer.name}
